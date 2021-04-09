@@ -4,6 +4,12 @@ import json
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 
+
+# TODO ADD verify distance to nearest city checks in th appropriate method
+# TODO ADD verify distance to Earth center checks in th appropriate method
+# TODO Review and confirm all tests
+
+
 class Tester:
     def __init__(self):
         super().__init__()
@@ -38,7 +44,7 @@ class Tester:
         log_data = {'test_name':testName, 'messages':[], 'error':[]}
         
         try:
-            self.get_loc_submit.click()
+            self.get_loc_btn.click()
             time.sleep(0.1)
 
             self.longitude_field.clear()
@@ -47,7 +53,7 @@ class Tester:
             self.longitude_field.send_keys(longitude)
             self.latitiude_field.send_keys(latitude)
 
-            self.get_loc_btn.click()
+            self.get_loc_submit.click()
             time.sleep(0.1)
 
             if self.driver.find_element_by_id("invalidLongtiude").is_displayed() and self.driver.find_element_by_id("invalidLatitude").is_displayed():
