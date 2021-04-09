@@ -5,8 +5,8 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 
 
-# TODO ADD verify distance to nearest city checks in th appropriate method
-# TODO ADD verify distance to Earth center checks in th appropriate method
+# TODO ADD verify distance to nearest city checks in the appropriate method
+# TODO ADD verify distance to Earth center checks in the appropriate method
 # TODO Review and confirm all tests
 
 
@@ -40,7 +40,7 @@ class Tester:
     -- Verify that longitudes and latitudes are formatted correctly
     -- Verify if the longitudes and latitudes entered point to the correct city
     '''
-    def verify_city(self, latitude, longitude, cityName, testName):
+    def verify_city(self, latitude, longitude, cityName, testName='Verify City'):
         log_data = {'test_name':testName, 'messages':[], 'error':[]}
         
         try:
@@ -80,7 +80,7 @@ class Tester:
     -- Verify the distance from the nearest city center using GPS
     -- Verify coordinates received from the GPS
     '''
-    def verify_distance_city(self, cityName, testName):
+    def verify_distance_city(self, cityName, testName='Verify Distance to Nearist City'):
         log_data = {'test_name':testName, 'messages':[], 'error':[]}
 
         try:
@@ -103,7 +103,7 @@ class Tester:
     '''
     -- Verify the distance from the center of the Earth using GPS or manual fields
     '''
-    def verify_distance_earth(self,  latitude, longitude, testName, gps=False):
+    def verify_distance_earth(self, latitude, longitude, gps=False, testName='Verify Distance To Earth Center'):
         log_data = {'test_name':testName, 'messages':[], 'error':[]}
         
         try:
@@ -197,6 +197,17 @@ class Tester:
         '''
         -- TEST 02
         '''
+        self.verify_distance_city("Ankara")
+        self.driver.refresh()
+        self.verify_distance_city("Izmir")
+        self.driver.refresh()
+        self.verify_distance_city("Washington")
+        self.driver.refresh()
+
+        '''
+        -- TEST 03
+        '''
+        self.verify_distance_earth("39", "32")
 
 
         self.dispose()
