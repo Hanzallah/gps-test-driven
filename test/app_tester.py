@@ -203,11 +203,20 @@ class Tester:
         self.driver.refresh()
         self.verify_distance_city("Washington")
         self.driver.refresh()
+        self.verify_distance_city("123")
+        self.driver.refresh()
+        self.verify_distance_city("xyz")
+        self.driver.refresh()
 
         '''
         -- TEST 03
         '''
         self.verify_distance_earth("39", "32")
+        self.driver.refresh()
+        self.verify_distance_earth("39", "32", True)
+        self.driver.refresh()
+        self.verify_distance_earth("abc", "xyz")
+        self.driver.refresh()
 
 
         self.dispose()
