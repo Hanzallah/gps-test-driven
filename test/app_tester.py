@@ -4,12 +4,6 @@ import json
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 
-
-# TODO ADD verify distance to nearest city checks in the appropriate method
-# TODO ADD verify distance to Earth center checks in the appropriate method
-# TODO Review and confirm all tests
-
-
 class Tester:
     def __init__(self):
         super().__init__()
