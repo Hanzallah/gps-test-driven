@@ -1,12 +1,12 @@
 
 const request = (options, headers) => {
-    const defaults = {headers: headers};
+    const defaults = { headers: headers };
     options = Object.assign({}, defaults, options);
 
     return fetch(options.url, options)
         .then(response =>
             response.json().then(json => {
-                if(!response.ok) {
+                if (!response.ok) {
                     return Promise.reject(json);
                 }
                 return json;
@@ -27,16 +27,16 @@ export function getNearestCity(latitude, longitude) {
     }, headers);
 }
 
-export function reverseGeocode(latitude, longitude){
+export function reverseGeocode(latitude, longitude) {
     return request({
-        url: "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude="+ latitude + "&longitude=" + longitude +"&localityLanguage=tr",
+        url: "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + latitude + "&longitude=" + longitude + "&localityLanguage=tr",
         method: 'GET'
     });
 }
 
-export function getAltitude(latitude, longitude){
+export function getAltitude(latitude, longitude) {
     return request({
-        url: "https://elevation-api.io/api/elevation?points=("+latitude+","+longitude+"&key=foieI5u43929GMrj-33K-35docCav2",
+        url: "https://elevation-api.io/api/elevation?points=(" + latitude + "," + longitude + "&key=foieI5u43929GMrj-33K-35docCav2",
         method: 'GET'
     });
 }

@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+h4{
+  font-size: small;
+}
+
+.btn:hover{
+  background-color:#890e14;
+}
+
+.btn{ 
+  background-color: #e50914;
+  height: fit-content;
+  color: white;
+  border: 0;
+  font-size: 15px;
+  border-radius: 3px;
+  padding: 8px 17px;
+  cursor: pointer;
+  text-decoration: none;
+}
