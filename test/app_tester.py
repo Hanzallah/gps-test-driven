@@ -34,7 +34,7 @@ class Tester:
             self.longitude_field.send_keys(longitude)
             self.latitiude_field.send_keys(latitude)
 
-            self.get_loc_submit.click()
+            self.coord_submit.click()
             time.sleep(0.4)
 
             if self.driver.find_element_by_id("invalidLongtiude").is_displayed() and self.driver.find_element_by_id("invalidLatitude").is_displayed():
@@ -60,7 +60,7 @@ class Tester:
     -- Verify the distance from the nearest city center using GPS
     -- Verify coordinates received from the GPS
     '''
-    def verify_distance_city(self, cityName, testName='Verify Distance to Nearist City'):
+    def verify_distance_city(self, cityName, testName='Verify Distance to Nearest City'):
         log_data = {'test_name':testName, 'messages':[], 'error':[]}
 
         try:
@@ -91,18 +91,18 @@ class Tester:
                 self.longitude_field.send_keys(longitude)
                 self.latitiude_field.send_keys(latitude)
 
-                self.get_loc_btn.click()
+                self.coord_submit.click()
                 time.sleep(0.1)
 
                 if self.driver.find_element_by_id("invalidLongtiude").is_displayed():
                     log_data['messages'].append("Invalid longitude")
                 if self.driver.find_element_by_id("invalidLatitude").is_displayed():
                     log_data['messages'].append("Invalid latitude")
-                if self.driver.find_element_by_id("distanceEarth").is_displayed():
+                elif self.driver.find_element_by_id("earthCenter").is_displayed():
                     log_data['messages'].append(f"{testName} Passed")
             else:
-                
-                if self.driver.find_element_by_id("distanceEarth").is_displayed():
+                self.get_loc.click()
+                if self.driver.find_element_by_id("earthCenter").is_displayed():
                     log_data['messages'].append(f"{testName} Passed")
                 else:
                     log_data['messages'].append("Invalid distance")
@@ -125,10 +125,12 @@ class Tester:
                 if (len(log_data['messages']) > 0):
                     for msg in log_data['messages']:
                         file.write(f"\n- Message - {msg}")
-                file.write(f"\nErrors:")
+                file.write(f"\nErrors: ")
                 if (len(log_data['error']) > 0):
                     for err in log_data['error']:
                         file.write(f"\n- Error - {err}")
+                else:
+                    file.write(f"None")
                 file.write('\n')
             file.close
         except:
@@ -143,7 +145,9 @@ class Tester:
 
         self.latitiude_field = self.driver.find_element_by_id("latitude")
         self.longitude_field = self.driver.find_element_by_id("longitude")
-        self.get_loc_submit = self.driver.find_element_by_id("sendCoordinateButton")
+        self.coord_submit = self.driver.find_element_by_id("sendCoordinateButton")
+        self.get_loc = self.driver.find_element_by_id("getCurrentLocation")
+        
 
         '''
         -- TEST 01
@@ -176,12 +180,9 @@ class Tester:
         '''
         -- TEST 03
         '''
-        # self.verify_distance_earth("39", "32")
-        # self.driver.refresh()
-        # self.verify_distance_earth("39", "32", True)
-        # self.driver.refresh()
-        # self.verify_distance_earth("abc", "xyz")
-        # self.driver.refresh()
+        self.verify_distance_earth("39.916668", "116.383331")
+        self.verify_distance_earth("39", "32", True)
+        self.verify_distance_earth("abc", "xyz")
 
 
         self.dispose()

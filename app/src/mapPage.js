@@ -181,7 +181,7 @@ class MapPage extends React.Component {
                         or
                         <div className="col-12 ml-2 mt-1">
 
-                            <button type="button" className="btn mr-3" id="updateCurrentLocation" onClick={this.handleCurrentCoordinates}>Get Current Coordinates</button>
+                            <button type="button" className="btn mr-3" id="getCurrentLocation" onClick={this.handleCurrentCoordinates}>Get Current Coordinates</button>
                         </div>
                     </div>
                     <div className="mt-5" />

@@ -3,58 +3,77 @@ Test Name:
 - Verify City
 Messages:
 - Message - Invalid city retrieved
-Errors:
+Errors: None
 --------------------------------------
 Test Name:
 - Verify City
 Messages:
 - Message - Invalid city retrieved
-Errors:
+Errors: None
 --------------------------------------
 Test Name:
 - Verify City
 Messages:
 - Message - Verify City Passed
-Errors:
+Errors: None
 --------------------------------------
 Test Name:
 - Verify City
 Messages:
 - Message - Invalid latitude
-Errors:
+Errors: None
 --------------------------------------
 Test Name:
 - Verify City
 Messages:
 - Message - City with given co-ordinates could not be found
-Errors:
+Errors: None
 --------------------------------------
 Test Name:
 - Verify City
 Messages:
 - Message - Invalid latitude and longitude
-Errors:
+Errors: None
 --------------------------------------
 Test Name:
 - Verify City
 Messages:
 - Message - Invalid longitude
-Errors:
+Errors: None
 --------------------------------------
 Test Name:
 - Verify City
 Messages:
 - Message - Invalid latitude
-Errors:
+Errors: None
 --------------------------------------
 Test Name:
 - Verify City
 Messages:
 - Message - Invalid latitude
-Errors:
+Errors: None
 --------------------------------------
 Test Name:
 - Verify City
 Messages:
 - Message - City with given co-ordinates could not be found
-Errors:
+Errors: None
+--------------------------------------
+Test Name:
+- Verify Distance To Earth Center
+Messages:
+- Message - Verify Distance To Earth Center Passed
+Errors: None
+--------------------------------------
+Test Name:
+- Verify Distance To Earth Center
+Messages:
+- Message - Verify Distance To Earth Center Passed
+Errors: None
+--------------------------------------
+Test Name:
+- Verify Distance To Earth Center
+Messages:
+- Message - Invalid longitude
+- Message - Invalid latitude
+Errors: None
