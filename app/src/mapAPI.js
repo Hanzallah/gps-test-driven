@@ -29,7 +29,7 @@ export function getNearestCity(latitude, longitude) {
 
 export function reverseGeocode(latitude, longitude) {
     return request({
-        url: "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + latitude + "&longitude=" + longitude + "&localityLanguage=tr",
+        url: "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + latitude + "&longitude=" + longitude + "&localityLanguage=en",
         method: 'GET'
     });
 }

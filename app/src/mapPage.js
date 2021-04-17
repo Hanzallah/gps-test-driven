@@ -156,7 +156,7 @@ class MapPage extends React.Component {
                                 <div className="col-9">
                                     <input className={this.state.latValidation === '' ? "form-control" : "form-control is-invalid"} type="number"
                                         value={this.state.latitude} onChange={this.handleLatChange} step="0.1" id="latitude" />
-                                    <div className="invalid-feedback" id="latitudeValidation">{this.state.latValidation}</div>
+                                    <div className="invalid-feedback" id="invalidLatitude">{this.state.latValidation}</div>
                                 </div>
                             </div>
                         </div>
@@ -167,13 +167,13 @@ class MapPage extends React.Component {
                                 <div className="col-9">
                                     <input className={this.state.lngValidation === '' ? "form-control" : "form-control is-invalid"} type="number"
                                         value={this.state.longitude} onChange={this.handleLngChange} step="0.1" id="longitude" />
-                                    <div className="invalid-feedback" id="longitudeValidation">{this.state.lngValidation}</div>
+                                    <div className="invalid-feedback" id="invalidLongtiude">{this.state.lngValidation}</div>
                                 </div>
                             </div>
                         </div>
 
                         <div className="col-12 mt-1">
-                            <button id="btn" type="button" className="btn" id="sendCoordinateButton"
+                            <button type="button" className="btn" id="sendCoordinateButton"
                                 onClick={this.handleSendCoordinates}>
                                 Send Coordinates
                         </button>
@@ -181,37 +181,39 @@ class MapPage extends React.Component {
                         or
                         <div className="col-12 ml-2 mt-1">
 
-                            <button id="btn" type="button" className="btn mr-3" id="updateCurrentLocation" onClick={this.handleCurrentCoordinates}>Get Current Coordinates</button>
+                            <button type="button" className="btn mr-3" id="updateCurrentLocation" onClick={this.handleCurrentCoordinates}>Get Current Coordinates</button>
                         </div>
-
-
-
                     </div>
                     <div className="mt-5" />
                     <div className={this.state.enteredCity === '' ? "d-none" : "row"}>
-                        <h4 className="m-auto w-100" id="enteredCity"> Entered coordinates are in {this.state.enteredCity}</h4>
+                        <h4 className="m-auto w-100">Entered coordinates are in </h4>
+                        <h4 className="m-auto w-100" id="city">{this.state.enteredCity}</h4>
                     </div>
                     <hr className={this.state.enteredCity === '' ? "d-none" : ""} />
                     <div className={this.state.earthEnteredCityDistance === '' ? "d-none" : "row justify-content-center"} id="enteredCityEarthCenterInformation">
-                        <h4 id="earthCenterCurrentLocDistance">
-                            Distance between entered location and the earth center is approximately {this.state.earthEnteredCityDistance} meters
+                        <h4>
+                            Distance to earth center is approximately
                     </h4>
+                    <h4 id="earthCenter"> {this.state.earthEnteredCityDistance} meters </h4>
                     </div>
                     <hr className={this.state.earthEnteredCityDistance === '' ? "d-none" : ""} />
                     <div className={this.state.enteredCityValidation === '' ? "d-none" : "row"} id="currentCityValidation">
-                        <h4 className="m-auto w-100"> Couldn't find a city with given coordinates</h4>
+                        <h4 className="m-auto w-100" id="noCoordinates">Couldn't find a city with given coordinates</h4>
                     </div>
                     <hr />
                     <div className={this.state.isCurrentLocationActive ? "row" : "d-none"}>
-                        <h4 id="currentCity" className="col-lg-4 m-auto">Current coordinates are in {this.state.currentCity}</h4>
+                        <h4 className="col-lg-4 m-auto">Current coordinates are in {this.state.currentCity}</h4>
+                        <h4 id="currentCity" className="col-lg-4 m-auto">{this.state.currentCity}</h4>
                     </div>
                     <hr className={this.state.isCurrentLocationActive ? "" : "d-none"} />
                     <div className={this.state.isCurrentLocationActive ? "row" : "d-none"}>
-                        <h4 id="currentLat" className="col-lg-4 m-auto">Current latitude is {this.state.currentLat}</h4>
+                        <h4 className="col-lg-4 m-auto">Current latitude is {this.state.currentLat}</h4>
+                        <h4 id="currentLat" className="col-lg-4 m-auto">{this.state.currentLat}</h4>
                     </div>
                     <hr className={this.state.isCurrentLocationActive ? "" : "d-none"} />
                     <div className={this.state.isCurrentLocationActive ? "row" : "d-none"}>
-                        <h4 id="currentLng" className="col-lg-4 m-auto">Current Longitude is {this.state.currentLng}</h4>
+                        <h4 className="col-lg-4 m-auto">Current Longitude is {this.state.currentLng}</h4>
+                        <h4 id="currentLng" className="col-lg-4 m-auto">{this.state.currentLng}</h4>
                     </div>
                     <hr className={this.state.isCurrentLocationActive ? "" : "d-none"} />
                     <div className={this.state.permissionDenied === '' ? "d-none" : "row"}>

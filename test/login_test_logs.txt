@@ -1,0 +1,60 @@
+--------------------------------------
+Test Name:
+- Verify City
+Messages:
+- Message - Invalid city retrieved
+Errors:
+--------------------------------------
+Test Name:
+- Verify City
+Messages:
+- Message - Invalid city retrieved
+Errors:
+--------------------------------------
+Test Name:
+- Verify City
+Messages:
+- Message - Verify City Passed
+Errors:
+--------------------------------------
+Test Name:
+- Verify City
+Messages:
+- Message - Invalid latitude
+Errors:
+--------------------------------------
+Test Name:
+- Verify City
+Messages:
+- Message - City with given co-ordinates could not be found
+Errors:
+--------------------------------------
+Test Name:
+- Verify City
+Messages:
+- Message - Invalid latitude and longitude
+Errors:
+--------------------------------------
+Test Name:
+- Verify City
+Messages:
+- Message - Invalid longitude
+Errors:
+--------------------------------------
+Test Name:
+- Verify City
+Messages:
+- Message - Invalid latitude
+Errors:
+--------------------------------------
+Test Name:
+- Verify City
+Messages:
+- Message - Invalid latitude
+Errors:
+--------------------------------------
+Test Name:
+- Verify City
+Messages:
+- Message - City with given co-ordinates could not be found
+Errors:
