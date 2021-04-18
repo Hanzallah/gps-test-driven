@@ -80,7 +80,7 @@ class MapPage extends React.Component {
             }).catch((error) => {
                 this.setState({ currentCity: '', isCurrentLocationActive: false });
             }).finally(() => {
-                this.updateNearest();
+                this.updateNearest(this.state.currentLat, this.state.currentLng);
                 this.handleEarthDistance("earthCurrentCityDistance", this.state.currentLat, this.state.currentLng);
             });
 
@@ -112,10 +112,11 @@ class MapPage extends React.Component {
         return isValid;
     }
 
-    updateNearest() {
+    updateNearest(lat, lng) {
         this.setState({ zoom: 10 });
-        const nearest = getNearestCity(this.state.currentLat, this.state.currentLng);
+        const nearest = getNearestCity(lat, lng);
         nearest.then((results) => {
+            console.log(results)
             for (let i = 0; i < results.data.length; i++) {
                 if (results.data[i].region.includes(this.state.currentCity) ||
                     results.data[i].name.includes(this.state.currentCity)) {
@@ -202,17 +203,17 @@ class MapPage extends React.Component {
                     </div>
                     <hr />
                     <div className={this.state.isCurrentLocationActive ? "row" : "d-none"}>
-                        <h4 className="col-lg-4 m-auto">Current coordinates are in {this.state.currentCity}</h4>
+                        <h4 className="col-lg-4 m-auto">Current coordinates are in</h4>
                         <h4 id="currentCity" className="col-lg-4 m-auto">{this.state.currentCity}</h4>
                     </div>
                     <hr className={this.state.isCurrentLocationActive ? "" : "d-none"} />
                     <div className={this.state.isCurrentLocationActive ? "row" : "d-none"}>
-                        <h4 className="col-lg-4 m-auto">Current latitude is {this.state.currentLat}</h4>
+                        <h4 className="col-lg-4 m-auto">Current latitude is</h4>
                         <h4 id="currentLat" className="col-lg-4 m-auto">{this.state.currentLat}</h4>
                     </div>
                     <hr className={this.state.isCurrentLocationActive ? "" : "d-none"} />
                     <div className={this.state.isCurrentLocationActive ? "row" : "d-none"}>
-                        <h4 className="col-lg-4 m-auto">Current Longitude is {this.state.currentLng}</h4>
+                        <h4 className="col-lg-4 m-auto">Current Longitude is</h4>
                         <h4 id="currentLng" className="col-lg-4 m-auto">{this.state.currentLng}</h4>
                     </div>
                     <hr className={this.state.isCurrentLocationActive ? "" : "d-none"} />
@@ -223,15 +224,19 @@ class MapPage extends React.Component {
                     </div>
                     <hr className={this.state.permissionDenied === '' ? "d-none" : "row"} />
                     <div className={this.state.nearestDistance === '' ? "d-none" : ""} id="nearestCityInformation">
-                        <h4 className="row justify-content-center" id="nearestDistance">Approximate distance to the nearest city is {this.state.nearestDistance} kilometers.</h4>
-                        <h4 className="row justify-content-center" id="nearestLat">Nearest city latitude is {this.state.nearestLat}</h4>
-                        <h4 className="row justify-content-center" id="nearestLng">Nearest city longitude is {this.state.nearestLng}</h4>
+                        <h4 className="row justify-content-center">Approximate distance to the nearest city is</h4>
+                        <h4 className="row justify-content-center" id="nearestDistance">{this.state.nearestDistance} kilometers</h4>
+                        <h4 className="row justify-content-center">Nearest city latitude is</h4>
+                        <h4 className="row justify-content-center" id="nearestLat">{this.state.nearestLat}</h4>
+                        <h4 className="row justify-content-center">Nearest city longitude is</h4>
+                        <h4 className="row justify-content-center" id="nearestLng">{this.state.nearestLng}</h4>
                     </div>
                     <hr className={this.state.nearestDistance === '' ? "d-none" : "row"} />
                     <div className={this.state.earthCurrentCityDistance === '' ? "d-none" : "row justify-content-center"} id="currentCityEarthCenterInformation">
                         <h4 id="earthCenterEnteredLocDistance">
                             Distance between current location and the earth center is approximately {this.state.earthCurrentCityDistance} meters
                     </h4>
+                    
                     </div>
                     <hr className={this.state.earthCurrentCityDistance === '' ? "d-none" : ""} />
                 </div>

@@ -22,7 +22,7 @@ export function getNearestCity(latitude, longitude) {
     });
 
     return request({
-        url: "https://wft-geo-db.p.rapidapi.com/v1/geo/locations/" + latitude + "%2B" + longitude + "/nearbyCities?limit=10&types=CITY&radius=100000",
+        url: "https://wft-geo-db.p.rapidapi.com/v1/geo/locations/" + latitude + "%2B" + longitude + "/nearbyCities?limit=10&types=CITY&radius=100",
         method: 'GET'
     }, headers);
 }

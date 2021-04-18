@@ -9,13 +9,17 @@ class Tester:
         super().__init__()
         self.init_tester()
         self.url = "http://localhost:3000/"
+        self.time_delay = 8
  
     '''
     -- Initialize the selenium firefox driver
     '''
     def init_tester(self):
         try:
-            self.driver = webdriver.Firefox(executable_path="geckodriver.exe")
+            geoAllowed = webdriver.FirefoxOptions()
+            geoAllowed.set_preference('geo.prompt.testing', True)
+            geoAllowed.set_preference('geo.prompt.testing.allow', True)
+            self.driver = webdriver.Firefox(executable_path="geckodriver.exe", options=geoAllowed)
         except:
             raise Exception('Could not connect to the browser.')
     
@@ -26,7 +30,10 @@ class Tester:
     '''
     def verify_city(self, latitude, longitude, cityName, testName='Verify City'):
         log_data = {'test_name':testName, 'messages':[], 'error':[]}
-        
+        self.latitiude_field = self.driver.find_element_by_id("latitude")
+        self.longitude_field = self.driver.find_element_by_id("longitude")
+        self.coord_submit = self.driver.find_element_by_id("sendCoordinateButton")
+
         try:
             self.longitude_field.clear()
             self.latitiude_field.clear()
@@ -35,7 +42,7 @@ class Tester:
             self.latitiude_field.send_keys(latitude)
 
             self.coord_submit.click()
-            time.sleep(0.4)
+            time.sleep(self.time_delay)
 
             if self.driver.find_element_by_id("invalidLongtiude").is_displayed() and self.driver.find_element_by_id("invalidLatitude").is_displayed():
                 log_data['messages'].append("Invalid latitude and longitude")
@@ -62,11 +69,14 @@ class Tester:
     '''
     def verify_distance_city(self, cityName, testName='Verify Distance to Nearest City'):
         log_data = {'test_name':testName, 'messages':[], 'error':[]}
+        self.get_loc = self.driver.find_element_by_id("getCurrentLocation")
 
         try:
-            if self.driver.find_element_by_id("nearestCity").text != cityName:
+            self.get_loc.click()
+            time.sleep(self.time_delay)
+            if self.driver.find_element_by_id("currentCity").text != cityName:
                 log_data['messages'].append("Invalid city retrieved")
-            elif self.driver.find_element_by_id("nearestCity").text == cityName and self.driver.find_element_by_id("distanceCity").is_displayed():
+            elif self.driver.find_element_by_id("currentCity").text == cityName and self.driver.find_element_by_id("nearestDistance").is_displayed():
                 log_data['messages'].append(f"{testName} Passed")
             else:
                 log_data['messages'].append("Invalid distance")
@@ -82,7 +92,11 @@ class Tester:
     '''
     def verify_distance_earth(self, latitude, longitude, gps=False, testName='Verify Distance To Earth Center'):
         log_data = {'test_name':testName, 'messages':[], 'error':[]}
-        
+        self.latitiude_field = self.driver.find_element_by_id("latitude")
+        self.longitude_field = self.driver.find_element_by_id("longitude")
+        self.coord_submit = self.driver.find_element_by_id("sendCoordinateButton")
+        self.get_loc = self.driver.find_element_by_id("getCurrentLocation")
+
         try:
             if (not gps):
                 self.longitude_field.clear()
@@ -92,7 +106,7 @@ class Tester:
                 self.latitiude_field.send_keys(latitude)
 
                 self.coord_submit.click()
-                time.sleep(0.1)
+                time.sleep(self.time_delay)
 
                 if self.driver.find_element_by_id("invalidLongtiude").is_displayed():
                     log_data['messages'].append("Invalid longitude")
@@ -102,8 +116,10 @@ class Tester:
                     log_data['messages'].append(f"{testName} Passed")
             else:
                 self.get_loc.click()
+                time.sleep(self.time_delay)
+
                 if self.driver.find_element_by_id("earthCenter").is_displayed():
-                    log_data['messages'].append(f"{testName} Passed")
+                    log_data['messages'].append(f"{testName} with GPS Passed")
                 else:
                     log_data['messages'].append("Invalid distance")
         except NoSuchElementException as e:
@@ -141,49 +157,49 @@ class Tester:
     '''
     def test_runner(self):
         start = time.time()
-        self.driver.get(self.url)
-
-        self.latitiude_field = self.driver.find_element_by_id("latitude")
-        self.longitude_field = self.driver.find_element_by_id("longitude")
-        self.coord_submit = self.driver.find_element_by_id("sendCoordinateButton")
-        self.get_loc = self.driver.find_element_by_id("getCurrentLocation")
-        
+        self.driver.get(self.url)    
 
         '''
         -- TEST 01
         '''
         self.verify_city("39.916668", "116.383331", "Beijing")
+        self.driver.refresh()
         self.verify_city("39.916668", "116.383331", "Izmir")
+        self.driver.refresh()
         self.verify_city("40.730610","-73.935242", "New York")
+        self.driver.refresh()
         self.verify_city("xyz","29.145423","Washington")
+        self.driver.refresh()
         self.verify_city("12.145423","-29.145423", "Washington")
+        self.driver.refresh()
         self.verify_city(" "," ", "Washington")
+        self.driver.refresh()
         self.verify_city("12.145423"," ", "Washington")
+        self.driver.refresh()
         self.verify_city(" ","29.145423", "Washington")
+        self.driver.refresh()
         self.verify_city("$$","54.145423", "Washington")
+        self.driver.refresh()
         self.verify_city("0.145423","0.145423", "Washington")
+        self.driver.refresh()
 
         '''
         -- TEST 02
         '''
-        # self.verify_distance_city("Ankara")
-        # self.driver.refresh()
-        # self.verify_distance_city("Izmir")
-        # self.driver.refresh()
-        # self.verify_distance_city("Washington")
-        # self.driver.refresh()
-        # self.verify_distance_city("123")
-        # self.driver.refresh()
-        # self.verify_distance_city("xyz")
-        # self.driver.refresh()
+        self.verify_distance_city("Ankara Province")
+        self.driver.refresh()
+        self.verify_distance_city("Izmir")
+        self.driver.refresh()
 
         '''
         -- TEST 03
         '''
         self.verify_distance_earth("39.916668", "116.383331")
+        self.driver.refresh()
         self.verify_distance_earth("39", "32", True)
+        self.driver.refresh()
         self.verify_distance_earth("abc", "xyz")
-
+        self.driver.refresh()
 
         self.dispose()
         end = time.time()
