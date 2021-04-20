@@ -20,7 +20,7 @@ Errors: None
 Test Name:
 - Verify City
 Messages:
-- Message - Invalid latitude
+- Message - Invalid longitude
 Errors: None
 --------------------------------------
 Test Name:
@@ -38,25 +38,7 @@ Errors: None
 Test Name:
 - Verify City
 Messages:
-- Message - Invalid longitude
-Errors: None
---------------------------------------
-Test Name:
-- Verify City
-Messages:
 - Message - Invalid latitude
-Errors: None
---------------------------------------
-Test Name:
-- Verify City
-Messages:
-- Message - Invalid latitude
-Errors: None
---------------------------------------
-Test Name:
-- Verify City
-Messages:
-- Message - City with given co-ordinates could not be found
 Errors: None
 --------------------------------------
 Test Name:
@@ -86,6 +68,5 @@ Errors: None
 Test Name:
 - Verify Distance To Earth Center
 Messages:
-- Message - Invalid longitude
-- Message - Invalid latitude
+- Message - Invalid latitude and longitude
 Errors: None

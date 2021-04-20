@@ -9,7 +9,7 @@ class Tester:
         super().__init__()
         self.init_tester()
         self.url = "http://localhost:3000/"
-        self.time_delay = 8
+        self.time_delay = 2
  
     '''
     -- Initialize the selenium firefox driver
@@ -73,7 +73,7 @@ class Tester:
 
         try:
             self.get_loc.click()
-            time.sleep(self.time_delay)
+            time.sleep(self.time_delay + 6)
             if self.driver.find_element_by_id("currentCity").text != cityName:
                 log_data['messages'].append("Invalid city retrieved")
             elif self.driver.find_element_by_id("currentCity").text == cityName and self.driver.find_element_by_id("nearestDistance").is_displayed():
@@ -107,10 +107,12 @@ class Tester:
 
                 self.coord_submit.click()
                 time.sleep(self.time_delay)
-
-                if self.driver.find_element_by_id("invalidLongtiude").is_displayed():
+                
+                if self.driver.find_element_by_id("invalidLongtiude").is_displayed() and self.driver.find_element_by_id("invalidLatitude").is_displayed():
+                    log_data['messages'].append("Invalid latitude and longitude")
+                elif self.driver.find_element_by_id("invalidLongtiude").is_displayed():
                     log_data['messages'].append("Invalid longitude")
-                if self.driver.find_element_by_id("invalidLatitude").is_displayed():
+                elif self.driver.find_element_by_id("invalidLatitude").is_displayed():
                     log_data['messages'].append("Invalid latitude")
                 elif self.driver.find_element_by_id("earthCenter").is_displayed():
                     log_data['messages'].append(f"{testName} Passed")
@@ -168,19 +170,13 @@ class Tester:
         self.driver.refresh()
         self.verify_city("40.730610","-73.935242", "New York")
         self.driver.refresh()
-        self.verify_city("xyz","29.145423","Washington")
+        self.verify_city("29.145423","xyz","Washington")
         self.driver.refresh()
         self.verify_city("12.145423","-29.145423", "Washington")
         self.driver.refresh()
         self.verify_city(" "," ", "Washington")
         self.driver.refresh()
-        self.verify_city("12.145423"," ", "Washington")
-        self.driver.refresh()
-        self.verify_city(" ","29.145423", "Washington")
-        self.driver.refresh()
         self.verify_city("$$","54.145423", "Washington")
-        self.driver.refresh()
-        self.verify_city("0.145423","0.145423", "Washington")
         self.driver.refresh()
 
         '''
