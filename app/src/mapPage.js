@@ -193,7 +193,7 @@ class MapPage extends React.Component {
                     <hr className={this.state.enteredCity === '' ? "d-none" : ""} />
                     <div className={this.state.earthEnteredCityDistance === '' ? "d-none" : "row justify-content-center"} id="enteredCityEarthCenterInformation">
                         <h4>
-                            Distance to earth center is approximately
+                            Distance to earth center is approximately&nbsp;
                     </h4>
                     <h4 id="earthCenter"> {this.state.earthEnteredCityDistance} meters </h4>
                     </div>
